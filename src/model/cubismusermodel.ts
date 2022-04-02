@@ -262,7 +262,7 @@ export class CubismUserModel {
   }
 
   /**
-   * レンダラの取得
+   *  取得模型渲染器 CubismRenderer_WebGL
    * @return レンダラ
    */
   public getRenderer(): CubismRenderer_WebGL {
@@ -270,13 +270,14 @@ export class CubismUserModel {
   }
 
   /**
-   * レンダラを作成して初期化を実行する
+   * 创建渲染器并执行初始化
    */
   public createRenderer(): void {
     if (this._renderer) {
       this.deleteRenderer();
     }
 
+    // 创建一个live2d渲染器
     this._renderer = new CubismRenderer_WebGL();
     this._renderer.initialize(this._model);
   }

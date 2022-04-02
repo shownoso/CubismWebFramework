@@ -68,18 +68,18 @@ export function csmDelete<T>(address: T): void {
 }
 
 /**
- * Live2D Cubism SDK Original Workflow SDKのエントリポイント
- * 利用開始時はCubismFramework.initialize()を呼び、CubismFramework.dispose()で終了する。
+ * Live2D Cubism SDK Original Workflow SDK 的入口
+ * 开始使用时，以 CubismFramework.initialize()开始，以 CubismFramework.dispose() 结束。
  */
 export class CubismFramework {
   /**
-   * Cubism FrameworkのAPIを使用可能にする。
-   *  APIを実行する前に必ずこの関数を実行すること。
-   *  一度準備が完了して以降は、再び実行しても内部処理がスキップされます。
+   * 启用 Cubism Framework API
+   * 务必在使用 API 前调用此函数
+   * 仅第一次执行有效
    *
-   * @param    option      Optionクラスのインスタンス
+   * @param    option  live2d 实例配置
    *
-   * @return   準備処理が完了したらtrueが返ります。
+   * @return   准备完成返回 true
    */
   public static startUp(option: Option = null): boolean {
     if (s_isStarted) {
@@ -249,9 +249,12 @@ export class CubismFramework {
   private constructor() {}
 }
 
+/**
+ *  live2d 的配置
+ */
 export class Option {
-  logFunction: Live2DCubismCore.csmLogFunction; // ログ出力の関数オブジェクト
-  loggingLevel: LogLevel; // ログ出力レベルの設定
+  logFunction: Live2DCubismCore.csmLogFunction; // 日志输出函数对象
+  loggingLevel: LogLevel; // 日志输出级别设置
 }
 
 /**

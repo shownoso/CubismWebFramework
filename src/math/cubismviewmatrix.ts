@@ -184,7 +184,7 @@ export class CubismViewMatrix extends CubismMatrix44 {
   }
 
   /**
-   * デバイスに対応する論理座標上の移動可能範囲の設定
+   * 在设备对应的逻辑坐标上设置最大移动范围
    * @param left      左辺のX軸の位置
    * @param right     右辺のX軸の位置
    * @param bottom    下辺のY軸の位置
@@ -203,16 +203,16 @@ export class CubismViewMatrix extends CubismMatrix44 {
   }
 
   /**
-   * 最大拡大率の設定
-   * @param maxScale 最大拡大率
+   * 设置最大放大倍率
+   * @param maxScale 放大率
    */
   public setMaxScale(maxScale: number): void {
     this._maxScale = maxScale;
   }
 
   /**
-   * 最小拡大率の設定
-   * @param minScale 最小拡大率
+   * 设置最小缩放倍率
+   * @param minScale 最小缩放率
    */
   public setMinScale(minScale: number): void {
     this._minScale = minScale;

@@ -26,7 +26,7 @@ let s_viewport: number[];
 let s_fbo: WebGLFramebuffer;
 
 /**
- * クリッピングマスクの処理を実行するクラス
+ * 执行剪贴蒙版处理的类
  */
 export class CubismClippingManager_WebGL {
   /**
@@ -1838,18 +1838,18 @@ export const fragmentShaderSrcMaskInvertedPremultipliedAlpha =
   '}';
 
 /**
- * WebGL用の描画命令を実装したクラス
+ *  live2d 绘制类， 实现绘图指令， 继承自 CubismRenderer， doDrawModel 在这里实现
  */
 export class CubismRenderer_WebGL extends CubismRenderer {
   /**
-   * レンダラの初期化処理を実行する
-   * 引数に渡したモデルからレンダラの初期化処理に必要な情報を取り出すことができる
+   * 根据传入的模型数据初始化渲染器
    *
    * @param model モデルのインスタンス
    */
   public initialize(model: CubismModel): void {
     if (model.isUsingMasking()) {
-      this._clippingManager = new CubismClippingManager_WebGL(); // クリッピングマスク・バッファ前処理方式を初期化
+      // 初始化剪贴蒙版/缓冲区预处理方法
+      this._clippingManager = new CubismClippingManager_WebGL();
       this._clippingManager.initialize(
         model,
         model.getDrawableCount(),
@@ -1860,7 +1860,8 @@ export class CubismRenderer_WebGL extends CubismRenderer {
 
     this._sortedDrawableIndexList.resize(model.getDrawableCount(), 0);
 
-    super.initialize(model); // 親クラスの処理を呼ぶ
+    // 调用父类初始化
+    super.initialize(model);
   }
 
   /**
@@ -1913,7 +1914,7 @@ export class CubismRenderer_WebGL extends CubismRenderer {
   }
 
   /**
-   * コンストラクタ
+   *  live2d 渲染器构造器
    */
   public constructor() {
     super();
@@ -1953,22 +1954,23 @@ export class CubismRenderer_WebGL extends CubismRenderer {
   }
 
   /**
-   * モデルを描画する実際の処理
+   * 绘制模型的实际过程
    */
   public doDrawModel(): void {
-    //------------ クリッピングマスク・バッファ前処理方式の場合 ------------
+    // console.log('模型真正的绘制实现是在这里')
+    //------------ 用于剪贴蒙版/缓冲区预处理方法 ------------
     if (this._clippingManager != null) {
       this.preDraw();
       this._clippingManager.setupClippingContext(this.getModel(), this);
     }
 
-    // 上記クリッピング処理内でも一度PreDrawを呼ぶので注意!!
+    // 请注意，即使在上述剪辑过程中，也会调用一次 PreDraw ！
     this.preDraw();
 
     const drawableCount: number = this.getModel().getDrawableCount();
     const renderOrder: Int32Array = this.getModel().getDrawableRenderOrders();
 
-    // インデックスを描画順でソート
+    // 按绘制顺序对索引进行排序
     for (let i = 0; i < drawableCount; ++i) {
       const order: number = renderOrder[i];
       this._sortedDrawableIndexList.set(order, i);
@@ -1978,12 +1980,12 @@ export class CubismRenderer_WebGL extends CubismRenderer {
     for (let i = 0; i < drawableCount; ++i) {
       const drawableIndex: number = this._sortedDrawableIndexList.at(i);
 
-      // Drawableが表示状態でなければ処理をパスする
+      // 如果 Drawable 未显示，则该过程通过。
       if (!this.getModel().getDrawableDynamicFlagIsVisible(drawableIndex)) {
         continue;
       }
 
-      // クリッピングマスクをセットする
+      // 设置剪贴蒙版
       this.setClippingContextBufferForDraw(
         this._clippingManager != null
           ? this._clippingManager
@@ -2103,9 +2105,9 @@ export class CubismRenderer_WebGL extends CubismRenderer {
   }
 
   /**
-   * レンダーステートを設定する
-   * @param fbo アプリケーション側で指定しているフレームバッファ
-   * @param viewport ビューポート
+   * 设置模型渲染器的渲染状态
+   * @param fbo 缓冲区
+   * @param viewport 视口
    */
   public setRenderState(fbo: WebGLFramebuffer, viewport: number[]): void {
     s_fbo = fbo;

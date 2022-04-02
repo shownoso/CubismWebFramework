@@ -20,11 +20,11 @@ export class CubismMatrix44 {
   }
 
   /**
-   * 受け取った２つの行列の乗算を行う。
+   * 矩阵相乘
    *
    * @param a 行列a
    * @param b 行列b
-   * @return 乗算結果の行列
+   * @return 矩阵之积
    */
   public static multiply(
     a: Float32Array,
@@ -66,7 +66,7 @@ export class CubismMatrix44 {
   }
 
   /**
-   * 単位行列に初期化する
+   * 初始化为单位矩阵
    */
   public loadIdentity(): void {
     const c: Float32Array = new Float32Array([
@@ -179,12 +179,10 @@ export class CubismMatrix44 {
   }
 
   /**
-   * 現在の行列の位置を起点にして移動
+   * 矩阵移动变换，相对于当前矩阵移动
    *
-   * 現在の行列の位置を起点にして相対的に移動する。
-   *
-   * @param x X軸の移動量
-   * @param y Y軸の移動量
+   * @param x X轴移动量
+   * @param y Y轴移动量
    */
   public translateRelative(x: number, y: number): void {
     const tr1: Float32Array = new Float32Array([
@@ -241,10 +239,10 @@ export class CubismMatrix44 {
   }
 
   /**
-   * 現在の行列の拡大率を相対的に設定する
+   * 设置当前矩阵的相对增长因子
    *
-   * @param x X軸の拡大率
-   * @param y Y軸の拡大率
+   * @param x X轴放大倍率
+   * @param y Y轴放大倍率
    */
   public scaleRelative(x: number, y: number): void {
     const tr1: Float32Array = new Float32Array([

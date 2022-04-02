@@ -40,7 +40,7 @@ export abstract class CubismRenderer {
   }
 
   /**
-   * モデルを描画する
+   * 绘制模型
    */
   public drawModel(): void {
     if (this.getModel() == null) return;
@@ -49,8 +49,8 @@ export abstract class CubismRenderer {
   }
 
   /**
-   * Model-View-Projection 行列をセットする
-   * 配列は複製されるので、元の配列は外で破棄して良い
+   * 设置 Model-View-Projection 矩阵
+   * 数组是复制的，原来的数组可能会被丢弃
    * @param matrix44 Model-View-Projection 行列
    */
   public setMvpMatrix(matrix44: CubismMatrix44): void {
@@ -120,8 +120,8 @@ export abstract class CubismRenderer {
   }
 
   /**
-   * 乗算済みαの有効・無効をセットする
-   * 有効にするならtrue、無効にするならfalseをセットする
+   * 设置相乘 α 的有效 true /无效 false
+   * 
    */
   public setIsPremultipliedAlpha(enable: boolean): void {
     this._isPremultipliedAlpha = enable;
@@ -194,22 +194,22 @@ export abstract class CubismRenderer {
   }
 
   /**
-   * モデル描画の実装
+   * 绘制模型的方法
    */
   public abstract doDrawModel(): void;
 
   /**
-   * 描画オブジェクト（アートメッシュ）を描画する
-   * ポリゴンメッシュとテクスチャ番号をセットで渡す。
-   * @param textureNo 描画するテクスチャ番号
-   * @param indexCount 描画オブジェクトのインデックス値
-   * @param vertexCount ポリゴンメッシュの頂点数
-   * @param indexArray ポリゴンメッシュ頂点のインデックス配列
-   * @param vertexArray ポリゴンメッシュの頂点配列
-   * @param uvArray uv配列
+   * 绘制绘图对象（艺术网格）
+   * 将多边形网格和纹理编号作为一组传递。
+   * @param textureNo 要绘制的纹理编号
+   * @param indexCount 绘图对象的索引值
+   * @param vertexCount 多边形网格上的顶点数
+   * @param indexArray 多边形网格顶点的索引数组
+   * @param vertexArray 多边形网格的顶点数组
+   * @param uvArray uv数组
    * @param opacity 不透明度
-   * @param colorBlendMode カラーブレンディングのタイプ
-   * @param invertedMask マスク使用時のマスクの反転使用
+   * @param colorBlendMode 混色型
+   * @param invertedMask 使用掩码时掩码反转
    */
   public abstract drawMesh(
     textureNo: number,
